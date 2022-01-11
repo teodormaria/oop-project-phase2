@@ -68,6 +68,10 @@ public final class AnnualChange {
         return childrenUpdates;
     }
 
+    public CityStrategyEnum getStrategy() {
+        return strategy;
+    }
+
     /**
      *
      * @param id

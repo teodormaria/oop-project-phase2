@@ -1,4 +1,4 @@
-package santa.strategies;
+package santa.averageScoreStrategies;
 
 import common.Constants;
 

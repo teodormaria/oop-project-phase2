@@ -5,7 +5,7 @@ import enums.Cities;
 import enums.ElvesType;
 import fileio.input.ChildInputData;
 import gifts.Gift;
-import santa.strategies.StrategyFactory;
+import santa.averageScoreStrategies.StrategyFactory;
 
 import java.util.ArrayList;
 
@@ -62,6 +62,8 @@ public final class Child implements Comparable<Child> {
      */
     private final double niceScoreBonus;
 
+/// TODO implement nice score bonus with Builder
+
     public Child(final ChildInputData input) {
         this.id = input.getId();
         this.lastName = input.getLastName();
@@ -71,10 +73,17 @@ public final class Child implements Comparable<Child> {
         this.niceScoreHistory = new ArrayList<>();
         this.niceScoreHistory.add(input.getNiceScore());
         this.giftsPreferences = input.getGiftsPreferences();
-        this.averageScore = StrategyFactory.useStrategy(age).getNiceScore(niceScoreHistory);
         this.receivedGifts = new ArrayList<>();
         this.elf = input.getElf();
         this.niceScoreBonus = input.getNiceScoreBonus();
+        double calculatedAverageScore = StrategyFactory.useStrategy(age)
+                .getNiceScore(niceScoreHistory);
+        calculatedAverageScore += calculatedAverageScore * this.niceScoreBonus / 100;
+        if (calculatedAverageScore > 10) {
+            this.averageScore = 10;
+        } else {
+            this.averageScore = calculatedAverageScore;
+        }
     }
 
     public Child(final int id, final String lastName, final String firstName, final int age,
@@ -89,8 +98,15 @@ public final class Child implements Comparable<Child> {
         this.niceScoreHistory = niceScoreHistory;
         this.giftsPreferences = giftsPreferences;
         this.receivedGifts = new ArrayList<>();
-        this.averageScore = StrategyFactory.useStrategy(age).getNiceScore(niceScoreHistory);
         this.niceScoreBonus = niceScoreBonus;
+        double calculatedAverageScore = StrategyFactory.useStrategy(age)
+                .getNiceScore(niceScoreHistory);
+        calculatedAverageScore += calculatedAverageScore * this.niceScoreBonus / 100;
+        if (calculatedAverageScore > 10) {
+            this.averageScore = 10;
+        } else {
+            this.averageScore = calculatedAverageScore;
+        }
         this.elf = elf;
     }
 
@@ -104,9 +120,9 @@ public final class Child implements Comparable<Child> {
         this.niceScoreHistory.addAll(child.getNiceScoreHistory());
         this.giftsPreferences = child.getGiftsPreferences();
         this.receivedGifts = new ArrayList<>();
-        this.averageScore = StrategyFactory.useStrategy(age).getNiceScore(niceScoreHistory);
         this.elf = child.getElf();
         this.niceScoreBonus = child.getNiceScoreBonus();
+        this.averageScore = child.getAverageScore();
     }
 
     public int getId() {
@@ -166,7 +182,13 @@ public final class Child implements Comparable<Child> {
      * @param budgetUnit
      */
     public void calculateAssignedBudget(final double budgetUnit) {
-        this.assignedBudget = budgetUnit * this.averageScore;
+        double budget = budgetUnit * this.averageScore;
+        if (this.elf.equals(ElvesType.BLACK)) {
+            budget = budget - budget * 30 / 100;
+        } else if (this.elf.equals(ElvesType.PINK)) {
+            budget = budget + budget * 30 / 100;
+        }
+        this.assignedBudget = budget;
     }
 
     /**

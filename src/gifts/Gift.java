@@ -22,7 +22,7 @@ public final class Gift implements Comparable<Gift> {
     /**
      * Quantity of gifts available
      */
-    private final int quantity;
+    private int quantity;
 
     public Gift(final GiftInputData input) {
         this.productName = input.getProductName();
@@ -45,6 +45,12 @@ public final class Gift implements Comparable<Gift> {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void wasGiven() {
+        if (this.quantity != 0) {
+            this.quantity--;
+        }
     }
 
     @Override

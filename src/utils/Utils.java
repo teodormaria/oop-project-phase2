@@ -63,7 +63,7 @@ public final class Utils {
         };
     }
 
-    public static CityStrategyEnum stringToCityStrategy( final String cityStrategy) {
+    public static CityStrategyEnum stringToCityStrategy(final String cityStrategy) {
         return switch (cityStrategy.toLowerCase()) {
             case "niceScoreCity" -> CityStrategyEnum.NICE_SCORE_CITY;
             case "id" -> CityStrategyEnum.ID;

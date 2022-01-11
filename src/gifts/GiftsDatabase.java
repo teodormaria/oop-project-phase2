@@ -45,7 +45,7 @@ public final class GiftsDatabase {
     public ArrayList<Gift> getGiftsByCategory(final Category category) {
         ArrayList<Gift> suitableGifts = new ArrayList<>();
         for (Gift gift : this.getGifts()) {
-            if (category.equals(gift.getCategory())) {
+            if (category.equals(gift.getCategory()) && gift.getQuantity() > 0) {
                 suitableGifts.add(gift);
             }
         }
