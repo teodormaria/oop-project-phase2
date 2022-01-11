@@ -1,0 +1,10 @@
+Starting audit...
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\fileio\input\InputLoader.java:112: Line is longer than 100 characters (found 102). [LineLength]
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\gifts\GiftsDatabase.java:19:19: 'static' modifier out of order with the JLS suggestions. [ModifierOrder]
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\gifts\GiftsDatabase.java:19:40: Name 'database' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\santa\strategies\StrategyFactory.java:8:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\utils\Utils.java:56:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\utils\Utils.java:66:5: Missing a Javadoc comment. [MissingJavadocMethod]
+[ERROR] C:\Users\teodo\Desktop\facultate\Anul II\Semestrul I\POO\proiect2\.\src\utils\Utils.java:66:56: '(' is followed by whitespace. [ParenPad]
+Audit done.
+Checkstyle ends with 7 errors.
