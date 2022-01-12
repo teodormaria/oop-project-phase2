@@ -47,6 +47,8 @@ public final class Constants {
     public static final Integer TEEN_THRESHOLD = 12;
     public static final Integer YOUNG_ADULT_THRESHOLD = 18;
     public static final Integer MAX_NICE_SCORE = 10;
+    public static final Integer MAX_PERCENTAGE = 100;
+    public static final Integer ELF_BOOST = 30;
 
     private Constants() {
         //constructor for checkstyle

@@ -53,6 +53,11 @@ public final class Utils {
         };
     }
 
+    /**
+     * Turns string into ElvesType Enum
+     * @param elf string
+     * @return ElvesType
+     */
     public static ElvesType stringToElf(final String elf) {
         return switch (elf.toLowerCase()) {
             case "yellow" -> ElvesType.YELLOW;
@@ -63,6 +68,11 @@ public final class Utils {
         };
     }
 
+    /**
+     * Turns string into CityStrategy Enum
+     * @param cityStrategy string
+     * @return cityStrategy
+     */
     public static CityStrategyEnum stringToCityStrategy(final String cityStrategy) {
         return switch (cityStrategy.toLowerCase()) {
             case "nicescorecity" -> CityStrategyEnum.NICE_SCORE_CITY;

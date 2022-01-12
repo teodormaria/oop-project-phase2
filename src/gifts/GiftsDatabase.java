@@ -27,7 +27,7 @@ public final class GiftsDatabase {
 
     /**
      * Adds gift to database
-     * @param gift
+     * @param gift to be added to database
      */
     public void addGift(final Gift gift) {
         this.getGifts().add(gift);
@@ -38,8 +38,8 @@ public final class GiftsDatabase {
     }
 
     /**
-     * Iterates through database and finds gifts of a given category
-     * @param category
+     * Iterates through database and finds gifts whose quantity isn't 0 of a given category
+     * @param category to be found
      * @return list of gifts
      */
     public ArrayList<Gift> getGiftsByCategory(final Category category) {
@@ -53,6 +53,11 @@ public final class GiftsDatabase {
         return suitableGifts;
     }
 
+    /**
+     * Iterates through database and finds gifts of a given category
+     * @param category to be found
+     * @return list of gifts
+     */
     public ArrayList<Gift> getAllGiftsByCategory(final Category category) {
         ArrayList<Gift> suitableGifts = new ArrayList<>();
         for (Gift gift : this.getGifts()) {
@@ -69,11 +74,5 @@ public final class GiftsDatabase {
      */
     public void restartDatabase() {
         gifts.removeAll(gifts);
-    }
-
-    @Override
-    public String toString() {
-        return "GiftsDatabase{" +
-                "gifts=" + gifts + "\n";
     }
 }

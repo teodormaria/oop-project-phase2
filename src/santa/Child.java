@@ -1,5 +1,6 @@
 package santa;
 
+import common.Constants;
 import enums.Category;
 import enums.Cities;
 import enums.ElvesType;
@@ -62,8 +63,6 @@ public final class Child implements Comparable<Child> {
      */
     private final double niceScoreBonus;
 
-/// TODO implement nice score bonus with Builder
-
     public Child(final ChildInputData input) {
         this.id = input.getId();
         this.lastName = input.getLastName();
@@ -78,9 +77,10 @@ public final class Child implements Comparable<Child> {
         this.niceScoreBonus = input.getNiceScoreBonus();
         double calculatedAverageScore = StrategyFactory.useStrategy(age)
                 .getNiceScore(niceScoreHistory);
-        calculatedAverageScore += calculatedAverageScore * this.niceScoreBonus / 100;
-        if (calculatedAverageScore > 10) {
-            this.averageScore = 10;
+        calculatedAverageScore += calculatedAverageScore * this.niceScoreBonus
+                / Constants.MAX_PERCENTAGE;
+        if (calculatedAverageScore > Constants.MAX_NICE_SCORE) {
+            this.averageScore = Constants.MAX_NICE_SCORE;
         } else {
             this.averageScore = calculatedAverageScore;
         }
@@ -101,9 +101,10 @@ public final class Child implements Comparable<Child> {
         this.niceScoreBonus = niceScoreBonus;
         double calculatedAverageScore = StrategyFactory.useStrategy(age)
                 .getNiceScore(niceScoreHistory);
-        calculatedAverageScore += calculatedAverageScore * this.niceScoreBonus / 100;
-        if (calculatedAverageScore > 10) {
-            this.averageScore = 10;
+        calculatedAverageScore += calculatedAverageScore
+                * this.niceScoreBonus / Constants.MAX_PERCENTAGE;
+        if (calculatedAverageScore > Constants.MAX_NICE_SCORE) {
+            this.averageScore = Constants.MAX_NICE_SCORE;
         } else {
             this.averageScore = calculatedAverageScore;
         }
@@ -179,14 +180,14 @@ public final class Child implements Comparable<Child> {
 
     /**
      * Given the value of a budgetUnit, calculates budget assigned to child
-     * @param budgetUnit
+     * @param budgetUnit value of a single budget  unit
      */
     public void calculateAssignedBudget(final double budgetUnit) {
         double budget = budgetUnit * this.averageScore;
         if (this.elf.equals(ElvesType.BLACK)) {
-            budget = budget - budget * 30 / 100;
+            budget = budget - budget * Constants.ELF_BOOST / Constants.MAX_PERCENTAGE;
         } else if (this.elf.equals(ElvesType.PINK)) {
-            budget = budget + budget * 30 / 100;
+            budget = budget + budget * Constants.ELF_BOOST / Constants.MAX_PERCENTAGE;
         }
         this.assignedBudget = budget;
     }
@@ -205,7 +206,7 @@ public final class Child implements Comparable<Child> {
 
     /**
      * adds gift to receivedGifts
-     * @param gift
+     * @param gift to be given
      */
     public void giveGift(final Gift gift) {
         this.receivedGifts.add(gift);
@@ -214,23 +215,5 @@ public final class Child implements Comparable<Child> {
     @Override
     public int compareTo(final Child child) {
         return Integer.compare(this.id, child.getId());
-    }
-
-    @Override
-    public String toString() {
-        return "Child{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", age=" + age +
-                ", city=" + city +
-                ", niceScoreHistory=" + niceScoreHistory +
-                ", giftsPreferences=" + giftsPreferences +
-                ", assignedBudget=" + assignedBudget +
-                ", averageScore=" + averageScore +
-                ", receivedGifts=" + receivedGifts +
-                ", elf=" + elf +
-                ", niceScoreBonus=" + niceScoreBonus +
-                "}\n";
     }
 }

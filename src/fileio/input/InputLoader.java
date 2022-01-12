@@ -109,8 +109,8 @@ public class InputLoader {
                                     .toString()),
                             Utils.stringArrayToCategoryArray(Utils.convertJSONArray((JSONArray)
                                     ((JSONObject) newChild).get(Constants.GIFTS_PREFERENCES))),
-                            Double.parseDouble(((JSONObject) newChild).get(Constants.NICE_SCORE_BONUS)
-                                    .toString()),
+                            Double.parseDouble(((JSONObject) newChild)
+                                    .get(Constants.NICE_SCORE_BONUS).toString()),
                             Utils.stringToElf((String) ((JSONObject) newChild).get(Constants.ELF))
                     ));
                 }

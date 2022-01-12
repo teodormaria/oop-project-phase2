@@ -47,6 +47,9 @@ public final class Gift implements Comparable<Gift> {
         return quantity;
     }
 
+    /**
+     * Function that reduces a gift's quantity if it wasn't already null
+     */
     public void wasGiven() {
         if (this.quantity != 0) {
             this.quantity--;
@@ -60,15 +63,5 @@ public final class Gift implements Comparable<Gift> {
         } else {
             return Double.compare(price, gift.getPrice());
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Gift{" +
-                "productName='" + productName + '\'' +
-                ", price=" + price +
-                ", category=" + category +
-                ", quantity=" + quantity +
-                "}\n";
     }
 }

@@ -11,8 +11,11 @@ import santa.Child;
 import santa.sortingStrategies.IdComparator;
 import utils.Utils;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Class that stores data relevant to each year
@@ -144,6 +147,11 @@ public final class YearlyData {
         this.budgetUnit = this.santaBudget / averageScoresSum;
     }
 
+    /**
+     * Gets the average score for a given city
+     * @param city whose average score is unknown
+     * @return average score of all children from given city
+     */
     public double getCityAverageNiceScore(final Cities city) {
         double averageScore = 0;
         int counter = 0;
@@ -160,6 +168,11 @@ public final class YearlyData {
         }
     }
 
+    /**
+     * Filters children by their city
+     * @param city whose children we're interested in
+     * @return list of children from given city
+     */
     public ArrayList<Child> getChildrenByCity(final Cities city) {
         ArrayList<Child> childrenByCity = new ArrayList<>();
         for (Child child : children) {
@@ -167,10 +180,13 @@ public final class YearlyData {
                 childrenByCity.add(child);
             }
         }
-        Collections.sort(childrenByCity,new IdComparator());
+        Collections.sort(childrenByCity, new IdComparator());
         return childrenByCity;
     }
 
+    /**
+     * Orders children field by the nice Score of their city
+     */
     public void orderChildrenByNiceScoreCity() {
         LinkedHashMap<String, Double> scoreMap = new LinkedHashMap<>();
         for (Cities city : Cities.values()) {

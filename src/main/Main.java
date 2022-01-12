@@ -49,7 +49,6 @@ public final class Main {
             String filepath = Constants.OUTPUT_PATH + testNumber + Constants.FILE_EXTENSION;
             File out = new File(filepath);
             boolean isCreated = out.createNewFile();
-            System.out.println(out.getAbsolutePath());
             if (isCreated) {
                 InputLoader inputLoader = new InputLoader(file.getAbsolutePath());
                 Input input = inputLoader.readData();

@@ -4,7 +4,7 @@ import santa.Child;
 
 import java.util.Comparator;
 
-public class NiceScoreComparator implements Comparator<Child> {
+public final class NiceScoreComparator implements Comparator<Child> {
     @Override
     public int compare(final Child firstChild, final Child secondChild) {
         if (firstChild.getAverageScore() == secondChild.getAverageScore()) {

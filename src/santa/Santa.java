@@ -15,7 +15,6 @@ import santa.sortingStrategies.NiceScoreComparator;
 import year.AnnualChange;
 import year.YearlyData;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -102,7 +101,6 @@ public final class Santa {
                 }
             }
         }
-        System.out.println("year done");
         Collections.sort(yearlyData.getChildren());
     }
 
