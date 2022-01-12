@@ -121,7 +121,9 @@ public class InputLoader {
                                         .toString()),
                                 Utils.stringArrayToCategoryArray(Utils.convertJSONArray((JSONArray)
                                         ((JSONObject) childUpdate)
-                                                .get(Constants.GIFTS_PREFERENCES))))
+                                                .get(Constants.GIFTS_PREFERENCES))),
+                                Utils.stringToElf((String) ((JSONObject) childUpdate)
+                                .get(Constants.ELF)))
                                 .niceScore(Double.parseDouble(((JSONObject) childUpdate)
                                         .get(Constants.NICE_SCORE).toString())).build();
                         childrenUpdates.add(singleChildUpdate);
@@ -131,7 +133,9 @@ public class InputLoader {
                                         .toString()),
                                 Utils.stringArrayToCategoryArray(Utils.convertJSONArray((JSONArray)
                                         ((JSONObject) childUpdate)
-                                                .get(Constants.GIFTS_PREFERENCES)))).build();
+                                                .get(Constants.GIFTS_PREFERENCES))),
+                                Utils.stringToElf((String) ((JSONObject) childUpdate)
+                                        .get(Constants.ELF))).build();
                         childrenUpdates.add(singleChildUpdate);
                     }
                 }

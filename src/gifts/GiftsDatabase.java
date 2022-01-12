@@ -53,10 +53,27 @@ public final class GiftsDatabase {
         return suitableGifts;
     }
 
+    public ArrayList<Gift> getAllGiftsByCategory(final Category category) {
+        ArrayList<Gift> suitableGifts = new ArrayList<>();
+        for (Gift gift : this.getGifts()) {
+            if (category.equals(gift.getCategory())) {
+                suitableGifts.add(gift);
+            }
+        }
+        Collections.sort(suitableGifts);
+        return suitableGifts;
+    }
+
     /**
      * After each simulation, database must be cleared
      */
     public void restartDatabase() {
         gifts.removeAll(gifts);
+    }
+
+    @Override
+    public String toString() {
+        return "GiftsDatabase{" +
+                "gifts=" + gifts + "\n";
     }
 }

@@ -1,6 +1,7 @@
 package fileio.input;
 
 import enums.Category;
+import enums.ElvesType;
 
 import java.util.ArrayList;
 
@@ -24,19 +25,23 @@ public final class ChildUpdateInputData {
      * Boolean of whether the niceScore exists or not
      */
     private final boolean hasNewScore;
+    private final ElvesType elf;
 
     /**
      * Builder class to help with cases when newScore has null value
      */
     public static final class Builder {
-        private int id;
+        private final int id;
         private double niceScore = -1;
-        private ArrayList<Category> giftsPreferences;
+        private final ArrayList<Category> giftsPreferences;
         private boolean hasNewScore = false;
+        private final ElvesType elf;
 
-        public Builder(final int id, final ArrayList<Category> giftsPreferences) {
+        public Builder(final int id, final ArrayList<Category> giftsPreferences,
+                       final ElvesType elf) {
             this.id = id;
             this.giftsPreferences = giftsPreferences;
+            this.elf = elf;
         }
 
         /**
@@ -64,6 +69,7 @@ public final class ChildUpdateInputData {
         this.niceScore = builder.niceScore;
         this.giftsPreferences = builder.giftsPreferences;
         this.hasNewScore = builder.hasNewScore;
+        this.elf = builder.elf;
     }
 
     public int getId() {
@@ -80,5 +86,9 @@ public final class ChildUpdateInputData {
 
     public boolean getHasNewScore() {
         return hasNewScore;
+    }
+
+    public ElvesType getElf() {
+        return elf;
     }
 }

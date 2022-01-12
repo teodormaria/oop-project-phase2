@@ -61,4 +61,14 @@ public final class Gift implements Comparable<Gift> {
             return Double.compare(price, gift.getPrice());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Gift{" +
+                "productName='" + productName + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                ", quantity=" + quantity +
+                "}\n";
+    }
 }

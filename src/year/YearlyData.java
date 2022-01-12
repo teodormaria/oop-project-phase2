@@ -4,10 +4,12 @@ import common.Constants;
 import enums.Category;
 import enums.Cities;
 import enums.CityStrategyEnum;
+import enums.ElvesType;
 import gifts.Gift;
 import gifts.GiftsDatabase;
 import santa.Child;
 import santa.sortingStrategies.IdComparator;
+import utils.Utils;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -65,6 +67,7 @@ public final class YearlyData {
                     ArrayList<Double> newNiceScoreHistory = new ArrayList<>();
                     newNiceScoreHistory.addAll(child.getNiceScoreHistory());
                     ArrayList<Category> preferredCategories = new ArrayList<>();
+                    ElvesType elf = null;
                     for (ChildUpdate childUpdate : childUpdates) {
                         if (childUpdate.getHasNewScore()) {
                             newNiceScoreHistory.add(childUpdate.getNiceScore());
@@ -76,6 +79,10 @@ public final class YearlyData {
                                 }
                             }
                         }
+                        elf = childUpdate.getElf();
+                    }
+                    if (elf == null) {
+                        elf = child.getElf();
                     }
                     for (Category category : child.getGiftsPreferences()) {
                         if (!preferredCategories.contains(category)) {
@@ -85,7 +92,7 @@ public final class YearlyData {
                     Child newChild = new Child(child.getId(), child.getLastName(),
                             child.getFirstName(), child.getAge() + 1, child.getCity(),
                             newNiceScoreHistory, preferredCategories, child.getNiceScoreBonus(),
-                            child.getElf());
+                            elf);
                     this.children.add(newChild);
                 } else {
                     this.children.add(new Child(child));
@@ -102,7 +109,7 @@ public final class YearlyData {
         }
         this.setBudgetUnit();
         for (Child child : children) {
-            child.setAssignedBudget(child.getAverageScore() * this.getBudgetUnit());
+            child.calculateAssignedBudget(this.budgetUnit);
         }
     }
 
@@ -165,19 +172,19 @@ public final class YearlyData {
     }
 
     public void orderChildrenByNiceScoreCity() {
-        LinkedHashMap<Cities, Double> scoreMap = new LinkedHashMap<>();
+        LinkedHashMap<String, Double> scoreMap = new LinkedHashMap<>();
         for (Cities city : Cities.values()) {
-            scoreMap.put(city, getCityAverageNiceScore(city));
+            scoreMap.put(city.toString(), getCityAverageNiceScore(city));
         }
-        ArrayList<Cities> keys = new ArrayList<>(scoreMap.keySet());
+        ArrayList<String> keys = new ArrayList<>(scoreMap.keySet());
         ArrayList<Double> values = new ArrayList<>(scoreMap.values());
         Collections.sort(keys);
-        Collections.sort(values);
-        LinkedHashMap<Cities, Double> sortedCitiesScores = new LinkedHashMap<>();
+        Collections.sort(values, Collections.reverseOrder());
+        LinkedHashMap<String, Double> sortedCitiesScores = new LinkedHashMap<>();
         for (Double value: values) {
-            Iterator<Cities> keyIterator = keys.iterator();
+            Iterator<String> keyIterator = keys.iterator();
             while (keyIterator.hasNext()) {
-                Cities key = keyIterator.next();
+                String key = keyIterator.next();
                 if (scoreMap.get(key).equals(value)) {
                     keyIterator.remove();
                     sortedCitiesScores.put(key, value);
@@ -186,8 +193,8 @@ public final class YearlyData {
             }
         }
         ArrayList<Child> sortedChildren = new ArrayList<>();
-        for (Map.Entry<Cities, Double> mapEntry : sortedCitiesScores.entrySet()) {
-            sortedChildren.addAll(getChildrenByCity(mapEntry.getKey()));
+        for (Map.Entry<String, Double> mapEntry : sortedCitiesScores.entrySet()) {
+            sortedChildren.addAll(getChildrenByCity(Utils.stringToCities(mapEntry.getKey())));
         }
         this.children = sortedChildren;
     }

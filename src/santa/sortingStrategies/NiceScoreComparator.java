@@ -10,7 +10,7 @@ public class NiceScoreComparator implements Comparator<Child> {
         if (firstChild.getAverageScore() == secondChild.getAverageScore()) {
             return firstChild.getId() - secondChild.getId();
         } else {
-            return (int) (firstChild.getAverageScore() - secondChild.getAverageScore());
+            return Double.compare(secondChild.getAverageScore(), firstChild.getAverageScore());
         }
     }
 }

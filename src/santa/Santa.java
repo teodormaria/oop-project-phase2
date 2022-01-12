@@ -90,16 +90,20 @@ public final class Santa {
                 }
             }
         }
-        for (Child child :yearlyData.getChildren()) {
+        for (Child child : yearlyData.getChildren()) {
             if (child.getReceivedGifts().isEmpty() && child.getElf().equals(ElvesType.YELLOW)) {
                 ArrayList<Gift> suitableGifts = yearlyData.getGifts()
-                        .getGiftsByCategory(child.getGiftsPreferences().get(0));
+                        .getAllGiftsByCategory(child.getGiftsPreferences().get(0));
                 if (!suitableGifts.isEmpty()) {
-                    child.giveGift(suitableGifts.get(0));
-                    suitableGifts.get(0).wasGiven();
+                    if (suitableGifts.get(0).getQuantity() != 0) {
+                        child.giveGift(suitableGifts.get(0));
+                        suitableGifts.get(0).wasGiven();
+                    }
                 }
             }
         }
+        System.out.println("year done");
+        Collections.sort(yearlyData.getChildren());
     }
 
     /**

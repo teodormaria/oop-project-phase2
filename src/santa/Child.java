@@ -215,4 +215,22 @@ public final class Child implements Comparable<Child> {
     public int compareTo(final Child child) {
         return Integer.compare(this.id, child.getId());
     }
+
+    @Override
+    public String toString() {
+        return "Child{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", age=" + age +
+                ", city=" + city +
+                ", niceScoreHistory=" + niceScoreHistory +
+                ", giftsPreferences=" + giftsPreferences +
+                ", assignedBudget=" + assignedBudget +
+                ", averageScore=" + averageScore +
+                ", receivedGifts=" + receivedGifts +
+                ", elf=" + elf +
+                ", niceScoreBonus=" + niceScoreBonus +
+                "}\n";
+    }
 }

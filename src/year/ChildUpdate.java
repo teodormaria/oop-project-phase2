@@ -1,6 +1,7 @@
 package year;
 
 import enums.Category;
+import enums.ElvesType;
 import fileio.input.ChildUpdateInputData;
 
 import java.util.ArrayList;
@@ -25,12 +26,14 @@ public final class ChildUpdate {
      * Boolean of whether niceScore has a relevant value
      */
     private final boolean hasNewScore;
+    private final ElvesType elf;
 
     public ChildUpdate(final ChildUpdateInputData input) {
         this.id = input.getId();
         this.niceScore = input.getNiceScore();
         this.giftsPreferences = input.getGiftsPreferences();
         this.hasNewScore = input.getHasNewScore();
+        this.elf = input.getElf();
     }
     public int getId() {
         return id;
@@ -46,5 +49,9 @@ public final class ChildUpdate {
 
     public boolean getHasNewScore() {
         return hasNewScore;
+    }
+
+    public ElvesType getElf() {
+        return elf;
     }
 }
