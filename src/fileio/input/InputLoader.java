@@ -16,18 +16,11 @@ import java.util.List;
 /**
  * Class that loads input into an Input instance
  */
-public class InputLoader {
-    /**
-     * The path to the input file
-     */
-    private final String inputPath;
-
-    public InputLoader(final String inputPath) {
-        this.inputPath = inputPath;
-    }
+public record InputLoader(String inputPath) {
 
     /**
      * The method reads the database
+     *
      * @return an Input object
      */
     public Input readData() {
@@ -62,7 +55,7 @@ public class InputLoader {
                         Double.parseDouble(((JSONObject) jsonChild).get(Constants.NICE_SCORE_BONUS)
                                 .toString()),
                         Utils.stringToElf((String) ((JSONObject) jsonChild).get(Constants.ELF))
-                        ));
+                ));
             }
             JSONArray jsonGifts = (JSONArray) initialData.get(Constants.SANTA_GIFTS_LIST);
             for (Object jsonGift : jsonGifts) {
@@ -123,7 +116,7 @@ public class InputLoader {
                                         ((JSONObject) childUpdate)
                                                 .get(Constants.GIFTS_PREFERENCES))),
                                 Utils.stringToElf((String) ((JSONObject) childUpdate)
-                                .get(Constants.ELF)))
+                                        .get(Constants.ELF)))
                                 .niceScore(Double.parseDouble(((JSONObject) childUpdate)
                                         .get(Constants.NICE_SCORE).toString())).build();
                         childrenUpdates.add(singleChildUpdate);

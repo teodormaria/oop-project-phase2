@@ -26,6 +26,9 @@ public final class ChildUpdate {
      * Boolean of whether niceScore has a relevant value
      */
     private final boolean hasNewScore;
+    /**
+     * Child's new elf
+     */
     private final ElvesType elf;
 
     public ChildUpdate(final ChildUpdateInputData input) {

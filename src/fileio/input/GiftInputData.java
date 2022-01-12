@@ -5,31 +5,8 @@ import enums.Category;
 /**
  * Class that stores input information related to gifts
  */
-public final class GiftInputData {
-    /**
-     * Gift Name
-     */
-    private final String productName;
-    /**
-     * Gift price
-     */
-    private final double price;
-    /**
-     * Gift category
-     */
-    private final Category category;
-    /**
-     * Quantity of gifts available
-     */
-    private final int quantity;
-
-    public GiftInputData(final String productName, final double price, final Category category,
-                         final int quantity) {
-        this.productName = productName;
-        this.price = price;
-        this.category = category;
-        this.quantity = quantity;
-    }
+public record GiftInputData(String productName, double price, Category category,
+                            int quantity) {
 
     public String getProductName() {
         return productName;

@@ -128,10 +128,6 @@ public final class YearlyData {
         return santaBudget;
     }
 
-    public double getBudgetUnit() {
-        return budgetUnit;
-    }
-
     public CityStrategyEnum getStrategy() {
         return strategy;
     }

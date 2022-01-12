@@ -25,6 +25,9 @@ public final class ChildUpdateInputData {
      * Boolean of whether the niceScore exists or not
      */
     private final boolean hasNewScore;
+    /**
+     * New elf for child
+     */
     private final ElvesType elf;
 
     /**
